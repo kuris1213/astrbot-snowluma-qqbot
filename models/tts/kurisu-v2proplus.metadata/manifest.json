@@ -1,0 +1,36 @@
+{
+  "active_engine_fingerprint": "d3879b1bf0a419d8b590e79e",
+  "backend": "TensorRT-11",
+  "build_config": {
+    "max_aux_streams_by_stage": {
+      "gpt_step": 0
+    },
+    "optimization_level": 5,
+    "precision": "FP16",
+    "tf32": false,
+    "workspace_mib": 4096
+  },
+  "created_at": "2026-10-30T11:28:27.792217+00:00",
+  "default_voice_profile": "default",
+  "engines_rebuilt_at": "2026-10-30T13:36:59.672846+00:00",
+  "format": "aniflive-tts-model-package",
+  "languages": [
+    "zh",
+    "yue",
+    "en",
+    "ja",
+    "ko"
+  ],
+  "model_family": "gsv-v2proplus",
+  "model_id": "kurisu-v2proplus",
+  "precision": "FP16",
+  "reference_conditioning_cached": false,
+  "schema": 1,
+  "semantic_sampling": "native-v2proplus-v1",
+  "streaming": {
+    "overlap_frames": 12
+  },
+  "voice_profiles": [
+    "default"
+  ]
+}

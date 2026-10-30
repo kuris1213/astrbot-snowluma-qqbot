@@ -1,0 +1,29 @@
+{
+  "smtp": {
+    "host": "",
+    "port": 465,
+    "timeout_seconds": 30.0,
+    "use_tls": true,
+    "use_starttls": false,
+    "username": "",
+    "password": "",
+    "from_name": "AstrBot Mailer",
+    "from_email": "",
+    "default_reply_to": "",
+    "subject_prefix": ""
+  },
+  "tool": {
+    "enable_llm_tool": true,
+    "require_tool_confirmation": false
+  },
+  "security": {
+    "allowed_sender_ids": [],
+    "allowed_domains": [],
+    "blocked_domains": [],
+    "allowed_attachment_roots": [],
+    "allow_unsafe_all_attachment_paths": false,
+    "max_attachment_size_mb": 10,
+    "max_total_attachment_size_mb": 25,
+    "max_html_length": 200000
+  }
+}

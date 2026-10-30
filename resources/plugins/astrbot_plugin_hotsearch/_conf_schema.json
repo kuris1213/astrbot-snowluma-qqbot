@@ -1,0 +1,701 @@
+{
+  "api_key": {
+    "description": "全局API密钥",
+    "type": "string",
+    "hint": "统一密钥，所有接口共享",
+    "default": ""
+  },
+  "enable_memory_filter": {
+    "description": "启用AI偏好过滤推荐",
+    "type": "bool",
+    "hint": "开启后，无论原配置为何种格式，都会强制使用文本请求，并结合你填写的偏好内容推荐感兴趣的热点。",
+    "default": false
+  },
+  "user_preference": {
+    "description": "自定义偏好内容",
+    "type": "string",
+    "hint": "当启用AI偏好过滤推荐时，请填写你感兴趣的内容（如：科技、游戏、前端开发）。留空则让大模型自行发挥。",
+    "default": ""
+  },
+  "groups": {
+    "description": "推送群组列表",
+    "type": "list",
+    "hint": "填入群组的唯一标识符（Platform:GroupMessage:ID）",
+    "default": []
+  },
+  "push_time": {
+    "description": "推送时间",
+    "type": "string",
+    "hint": "定时推送时间，支持多个时间点用逗号分隔，如: 08:00,12:00",
+    "default": ""
+  },
+  "push_items": {
+    "description": "定时推送内容",
+    "type": "list",
+    "hint": "选择要定时推送的热搜平台",
+    "options": [
+      "douyin", "xhs", "zhihu", "weibo", "baidu", "dcd", "bilibili", 
+      "toutiao", "tencent", "quark", "maoyan", "douban", "kr36", 
+      "cto51", "pojie52", "acfun", "csdn", "hellogithub", "miyoushe", 
+      "ifanr", "ithome", "juejin", "netease", "sina", "sspai", 
+      "thepaper", "weatheralarm", "weread", "yicai", "yystv",
+      "cls", "kuaishou", "hykb"
+    ],
+    "default": ["weibo"]
+  },
+  "timeout": {
+    "description": "请求超时时间(秒)",
+    "type": "int",
+    "hint": "API请求的超时时间，默认30秒",
+    "default": 30
+  },
+  "enable_douyin": {
+    "description": "开启或关闭抖音热搜",
+    "type": "bool",
+    "default": true
+  },
+  "douyin_api": {
+    "description": "抖音热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/douyinrs 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/douyinrs"
+  },
+  "douyin_format": {
+    "description": "抖音接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_xhs": {
+    "description": "开启或关闭小红书热搜",
+    "type": "bool",
+    "default": true
+  },
+  "xhs_api": {
+    "description": "小红书热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/xhsrs 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/xhsrs"
+  },
+  "xhs_format": {
+    "description": "小红书接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_zhihu": {
+    "description": "开启或关闭知乎热搜",
+    "type": "bool",
+    "default": true
+  },
+  "zhihu_api": {
+    "description": "知乎热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/zhihu 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/zhihu"
+  },
+  "zhihu_format": {
+    "description": "知乎接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_weibo": {
+    "description": "开启或关闭微博热搜",
+    "type": "bool",
+    "default": true
+  },
+  "weibo_api": {
+    "description": "微博热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/wb 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/wb"
+  },
+  "weibo_format": {
+    "description": "微博接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_baidu": {
+    "description": "开启或关闭百度热搜",
+    "type": "bool",
+    "default": true
+  },
+  "baidu_api": {
+    "description": "百度热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/baidu 接口，参数 ?type=hot&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/baidu"
+  },
+  "baidu_type": {
+    "description": "百度榜单类型",
+    "type": "string",
+    "hint": "hot|teleplay（电视剧）|tieba（贴吧）",
+    "options": ["hot", "teleplay", "tieba"],
+    "default": "hot"
+  },
+  "baidu_format": {
+    "description": "百度接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_dcd": {
+    "description": "开启或关闭懂车帝热搜",
+    "type": "bool",
+    "default": true
+  },
+  "dcd_api": {
+    "description": "懂车帝热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/dongchedi 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/dongchedi"
+  },
+  "dcd_format": {
+    "description": "懂车帝接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_bilibili": {
+    "description": "开启或关闭哔哩哔哩热搜",
+    "type": "bool",
+    "default": true
+  },
+  "bilibili_api": {
+    "description": "哔哩哔哩热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/bilibilirs 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/bilibilirs"
+  },
+  "bilibili_format": {
+    "description": "哔哩哔哩接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["json", "text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_toutiao": {
+    "description": "开启或关闭头条热搜",
+    "type": "bool",
+    "default": true
+  },
+  "toutiao_api": {
+    "description": "头条热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/toutiao 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/toutiao"
+  },
+  "toutiao_format": {
+    "description": "头条接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_tencent": {
+    "description": "开启或关闭腾讯热搜",
+    "type": "bool",
+    "default": true
+  },
+  "tencent_api": {
+    "description": "腾讯热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/txxw 接口，参数 ?type=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/txxw"
+  },
+  "tencent_format": {
+    "description": "腾讯接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  }
+  ,
+  "enable_quark": {
+    "description": "开启或关闭夸克热搜",
+    "type": "bool",
+    "default": true
+  },
+  "quark_api": {
+    "description": "夸克热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/quark 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/quark"
+  },
+  "quark_format": {
+    "description": "夸克接口返回格式",
+    "type": "string",
+    "hint": "支持 json/text/image 三种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+
+  "enable_maoyan": {
+    "description": "开启或关闭猫眼票房",
+    "type": "bool",
+    "default": true
+  },
+  "maoyan_api": {
+    "description": "猫眼票房API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/maoyan 接口，参数 ?type=movie&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/maoyan"
+  },
+  "maoyan_type": {
+    "description": "猫眼榜单类型",
+    "type": "string",
+    "hint": "movie(实时票房)/tv(电视收视率)/web(网播热度)/all(全球票房总榜)",
+    "options": ["movie", "tv", "web", "all"],
+    "default": "all"
+  },
+  "maoyan_format": {
+    "description": "猫眼接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_douban": {
+    "description": "开启或关闭豆瓣热榜",
+    "type": "bool",
+    "default": true
+  },
+  "douban_api": {
+    "description": "豆瓣热榜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/douban 接口，参数 ?category=...&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/douban"
+  },
+  "douban_format": {
+    "description": "豆瓣接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_kr36": {
+    "description": "开启或关闭36氪热搜",
+    "type": "bool",
+    "default": true
+  },
+  "kr36_api": {
+    "description": "36氪热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/36kr 接口，参数 ?type=...&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/36kr"
+  },
+  "kr36_format": {
+    "description": "36氪接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_cto51": {
+    "description": "开启或关闭51CTO热搜",
+    "type": "bool",
+    "default": true
+  },
+  "cto51_api": {
+    "description": "51CTO热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/51cto 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/51cto"
+  },
+  "cto51_format": {
+    "description": "51CTO接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_pojie52": {
+    "description": "开启或关闭52破解热搜",
+    "type": "bool",
+    "default": true
+  },
+  "pojie52_api": {
+    "description": "52破解热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/52pojie 接口，参数 ?type=...&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/52pojie"
+  },
+  "pojie52_format": {
+    "description": "52破解接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_acfun": {
+    "description": "开启或关闭AcFun热搜",
+    "type": "bool",
+    "default": true
+  },
+  "acfun_api": {
+    "description": "AcFun热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/acfun 接口，参数 ?type=...&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/acfun"
+  },
+  "acfun_format": {
+    "description": "AcFun接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_csdn": {
+    "description": "开启或关闭CSDN热搜",
+    "type": "bool",
+    "default": true
+  },
+  "csdn_api": {
+    "description": "CSDN热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/csdn 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/csdn"
+  },
+  "csdn_format": {
+    "description": "CSDN接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_hellogithub": {
+    "description": "开启或关闭HelloGitHub热搜",
+    "type": "bool",
+    "default": true
+  },
+  "hellogithub_api": {
+    "description": "HelloGitHub热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/hellogithub 接口，参数 ?type=...&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/hellogithub"
+  },
+  "hellogithub_format": {
+    "description": "HelloGitHub接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_miyoushe": {
+    "description": "开启或关闭米游社热搜",
+    "type": "bool",
+    "default": true
+  },
+  "miyoushe_api": {
+    "description": "米游社热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/miyoushe 接口，参数 ?game=...&type=...&format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/miyoushe"
+  },
+  "miyoushe_format": {
+    "description": "米游社接口返回格式",
+    "type": "string",
+    "hint": "支持 text/image 两种",
+    "options": ["text", "image"],
+    "default": "image"
+  },
+  "enable_ifanr": {
+    "description": "开启或关闭爱范儿热搜",
+    "type": "bool",
+    "default": true
+  },
+  "ifanr_api": {
+    "description": "爱范儿热搜API",
+    "type": "string",
+    "hint": "使用 https://api.nycnm.cn/api/v2/ifanr 接口，参数 ?format=text/image",
+    "obvious_hint": true,
+    "default": "https://api.nycnm.cn/api/v2/ifanr"
+  },
+  "ifanr_format": {
+      "description": "爱范儿接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_ithome": {
+      "description": "开启或关闭IT之家热搜",
+      "type": "bool",
+      "default": true
+    },
+    "ithome_api": {
+      "description": "IT之家热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/xijiayi 接口，参数 ?type=news/hot&format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/xijiayi"
+    },
+    "ithome_format": {
+      "description": "IT之家接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_juejin": {
+      "description": "开启或关闭掘金热搜",
+      "type": "bool",
+      "default": true
+    },
+    "juejin_api": {
+      "description": "掘金热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/juejin 接口，参数 ?type=...&format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/juejin"
+    },
+    "juejin_format": {
+      "description": "掘金接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_netease": {
+      "description": "开启或关闭网易新闻热搜",
+      "type": "bool",
+      "default": true
+    },
+    "netease_api": {
+      "description": "网易新闻热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/netease 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/netease"
+    },
+    "netease_format": {
+      "description": "网易新闻接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_sina": {
+      "description": "开启或关闭新浪新闻热搜",
+      "type": "bool",
+      "default": true
+    },
+    "sina_api": {
+      "description": "新浪新闻热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/sina 接口，参数 ?type=...&format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/sina"
+    },
+    "sina_format": {
+      "description": "新浪新闻接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_sspai": {
+      "description": "开启或关闭少数派热搜",
+      "type": "bool",
+      "default": true
+    },
+    "sspai_api": {
+      "description": "少数派热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/sspai 接口，参数 ?type=...&format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/sspai"
+    },
+    "sspai_format": {
+      "description": "少数派接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_thepaper": {
+      "description": "开启或关闭澎湃新闻热搜",
+      "type": "bool",
+      "default": true
+    },
+    "thepaper_api": {
+      "description": "澎湃新闻热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/thepaper 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/thepaper"
+    },
+    "thepaper_format": {
+      "description": "知乎日报接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_weatheralarm": {
+      "description": "开启或关闭气象预警",
+      "type": "bool",
+      "default": true
+    },
+    "weatheralarm_api": {
+      "description": "气象预警API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/weatheralarm 接口，参数 ?province=...&format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/weatheralarm"
+    },
+    "weatheralarm_format": {
+      "description": "气象预警接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_weread": {
+      "description": "开启或关闭微信读书热搜",
+      "type": "bool",
+      "default": true
+    },
+    "weread_api": {
+      "description": "微信读书热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/weread 接口，参数 ?type=...&format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/weread"
+    },
+    "weread_format": {
+      "description": "微信读书接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_yicai": {
+      "description": "开启或关闭第一财经热搜",
+      "type": "bool",
+      "default": true
+    },
+    "yicai_api": {
+      "description": "第一财经热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/yicai 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/yicai"
+    },
+    "yicai_format": {
+      "description": "第一财经接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_yystv": {
+      "description": "开启或关闭游研社热搜",
+      "type": "bool",
+      "default": true
+    },
+    "yystv_api": {
+      "description": "游研社热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/yystv 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/yystv"
+    },
+    "yystv_format": {
+      "description": "游研社接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_cls": {
+      "description": "开启或关闭财联社热搜",
+      "type": "bool",
+      "default": true
+    },
+    "cls_api": {
+      "description": "财联社热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/cls 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/cls"
+    },
+    "cls_format": {
+      "description": "财联社接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_kuaishou": {
+      "description": "开启或关闭快手热搜",
+      "type": "bool",
+      "default": true
+    },
+    "kuaishou_api": {
+      "description": "快手热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/kuaishou 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/kuaishou"
+    },
+    "kuaishou_format": {
+      "description": "快手接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    },
+    "enable_hykb": {
+      "description": "开启或关闭好游快爆热搜",
+      "type": "bool",
+      "default": true
+    },
+    "hykb_api": {
+      "description": "好游快爆热搜API",
+      "type": "string",
+      "hint": "使用 https://api.nycnm.cn/api/v2/hykb 接口，参数 ?format=text/image",
+      "obvious_hint": true,
+      "default": "https://api.nycnm.cn/api/v2/hykb"
+    },
+    "hykb_format": {
+      "description": "好游快爆接口返回格式",
+      "type": "string",
+      "hint": "支持 text/image 两种",
+      "options": ["text", "image"],
+      "default": "image"
+    }
+}

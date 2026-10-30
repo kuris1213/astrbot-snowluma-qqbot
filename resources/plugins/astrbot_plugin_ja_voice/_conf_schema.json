@@ -1,0 +1,57 @@
+{
+  "enable": {
+    "description": "启用本插件（关闭后请改用 AstrBot 自带 TTS）",
+    "type": "bool",
+    "default": true
+  },
+  "tts_base": {
+    "description": "AnifLive-TTS 的 API 根地址（必须带 /v1）",
+    "type": "string",
+    "default": "http://127.0.0.1:9882/v1"
+  },
+  "model": {
+    "description": "模型 ID",
+    "type": "string",
+    "default": "kurisu-v2proplus"
+  },
+  "voice_profile": {
+    "description": "音色 ID",
+    "type": "string",
+    "default": "default"
+  },
+  "language": {
+    "description": "合成语言（这个音色是日语，保持 ja）",
+    "type": "string",
+    "default": "ja"
+  },
+  "probability": {
+    "description": "每条回复配语音的概率（0~1）",
+    "type": "float",
+    "default": 1.0
+  },
+  "keep_text": {
+    "description": "语音之外是否同时发送中文原文",
+    "type": "bool",
+    "default": true
+  },
+  "timeout": {
+    "description": "TTS 请求超时（秒）",
+    "type": "float",
+    "default": 120
+  },
+  "inject_voice_rule": {
+    "description": "给模型的系统提示词注入「不要自己合成语音」规则（软约束）",
+    "type": "bool",
+    "default": true
+  },
+  "block_self_tts_commands": {
+    "description": "硬约束：拦下 shell/python 里合成音频的命令（只挡这一类，其他命令照常可用）",
+    "type": "bool",
+    "default": true
+  },
+  "block_shell_tools": {
+    "description": "最粗暴：每次请求临时摘掉 shell / python 工具（会失去执行命令的能力，一般不用开）",
+    "type": "bool",
+    "default": false
+  }
+}

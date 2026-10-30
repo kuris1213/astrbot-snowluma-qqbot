@@ -1,0 +1,149 @@
+{
+  "smtp": {
+    "type": "object",
+    "description": "SMTP 发信设置",
+    "hint": "配置邮件服务器连接参数、发件人身份和默认邮件头。",
+    "items": {
+      "host": {
+        "type": "string",
+        "description": "SMTP 服务器地址",
+        "hint": "例如 smtp.qq.com、smtp.gmail.com。",
+        "default": ""
+      },
+      "port": {
+        "type": "int",
+        "description": "SMTP 服务器端口",
+        "hint": "常见端口为 465（隐式 TLS）或 587（STARTTLS）。",
+        "default": 465
+      },
+      "timeout_seconds": {
+        "type": "float",
+        "description": "SMTP 超时时间（秒）",
+        "hint": "用于限制连接、认证和发送阶段的最长等待时间，避免网络异常导致长时间卡住。",
+        "default": 30
+      },
+      "use_tls": {
+        "type": "bool",
+        "description": "启用隐式 TLS",
+        "hint": "适用于直接使用 TLS 建立连接的 SMTP 服务，通常搭配 465 端口。不要与 STARTTLS 同时开启。",
+        "default": true
+      },
+      "use_starttls": {
+        "type": "bool",
+        "description": "启用 STARTTLS",
+        "hint": "适用于先明文连接再升级为 TLS 的 SMTP 服务，通常搭配 587 端口。不要与隐式 TLS 同时开启。",
+        "default": false
+      },
+      "username": {
+        "type": "string",
+        "description": "SMTP 用户名",
+        "hint": "通常为邮箱地址，也可能是服务商要求的独立账号名。",
+        "default": ""
+      },
+      "password": {
+        "type": "string",
+        "description": "SMTP 密码或授权码",
+        "hint": "优先使用邮箱服务商提供的授权码，而不是主账号密码。",
+        "default": ""
+      },
+      "from_name": {
+        "type": "string",
+        "description": "发件人显示名称",
+        "hint": "显示在收件人邮件客户端中的发件人名称。",
+        "default": "AstrBot Mailer"
+      },
+      "from_email": {
+        "type": "string",
+        "description": "发件人邮箱地址",
+        "hint": "将写入邮件 From 头，并作为实际发信地址使用。",
+        "default": ""
+      },
+      "default_reply_to": {
+        "type": "string",
+        "description": "默认回复地址",
+        "hint": "可选。设置后，收件人点击“回复”时会优先回复到该地址。",
+        "default": ""
+      },
+      "subject_prefix": {
+        "type": "string",
+        "description": "主题前缀",
+        "hint": "可选。会自动添加到所有邮件主题前，例如【AstrBot】。",
+        "default": ""
+      }
+    }
+  },
+  "tool": {
+    "type": "object",
+    "description": "LLM 工具控制",
+    "hint": "控制是否向模型暴露发信工具，以及是否允许模型直接触发发送。",
+    "items": {
+      "enable_llm_tool": {
+        "type": "bool",
+        "description": "启用 send_email 工具",
+        "hint": "关闭后，LLM 将无法调用邮件发送工具，但管理员测试命令仍可保留。",
+        "default": true
+      },
+      "require_tool_confirmation": {
+        "type": "bool",
+        "description": "要求人工确认后再发送",
+        "hint": "【开发中】开启后，LLM 直接调用工具会被拒绝，待后续开发接入人工审核或确认流程。",
+        "default": false
+      }
+    }
+  },
+  "security": {
+    "type": "object",
+    "description": "安全限制与风控",
+    "hint": "限制谁可以发信、发给谁、以及允许读取哪些本地文件。",
+    "items": {
+      "allowed_sender_ids": {
+        "type": "list",
+        "description": "允许调用的用户 ID 列表",
+        "hint": "为空表示不限制。应填写类似 1871234567 这样的平台用户 ID。建议在生产环境中仅放行管理员或可信用户。",
+        "default": []
+      },
+      "allowed_domains": {
+        "type": "list",
+        "description": "收件人域名白名单",
+        "hint": "为空表示不限制。设置后，仅允许向这些域名发送邮件。",
+        "default": []
+      },
+      "blocked_domains": {
+        "type": "list",
+        "description": "收件人域名黑名单",
+        "hint": "优先级高于白名单，命中后会直接拒绝发送。",
+        "default": []
+      },
+      "allowed_attachment_roots": {
+        "type": "list",
+        "description": "允许读取的附件目录",
+        "hint": "填写绝对路径列表。为空时仅允许 plugin_data/astrbot_plugin_mailer/attachments 目录。",
+        "default": []
+      },
+      "allow_unsafe_all_attachment_paths": {
+        "type": "bool",
+        "description": "允许任意附件路径",
+        "hint": "高风险选项，默认关闭。开启后将允许读取任意本地文件路径，LLM 可能借此访问并外发服务器上的敏感文件，请仅在完全可信的受控环境中使用。",
+        "default": false
+      },
+      "max_attachment_size_mb": {
+        "type": "int",
+        "description": "单文件大小上限（MB）",
+        "hint": "单个附件或内嵌图片超过该大小时将被拒绝。",
+        "default": 10
+      },
+      "max_total_attachment_size_mb": {
+        "type": "int",
+        "description": "总文件大小上限（MB）",
+        "hint": "所有附件和内嵌图片的总大小超过该值时将被拒绝。",
+        "default": 25
+      },
+      "max_html_length": {
+        "type": "int",
+        "description": "HTML 正文长度上限",
+        "hint": "超过该长度的 html_body 将被拒绝，用于避免异常超长内容。",
+        "default": 200000
+      }
+    }
+  }
+}

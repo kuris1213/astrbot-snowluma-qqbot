@@ -1,0 +1,41 @@
+{
+  "gpt": {
+    "filename": "kurisu_crs_gpt-e100.ckpt",
+    "sha256": "c0888c026c6d0dde3e57d2541c5361701d99079d692fb88f413b7628156418fa"
+  },
+  "inspection": {
+    "gpt": {
+      "evidence": [
+        "GPT config matches the V2ProPlus AR dimensions",
+        "GPT tensor shapes match the V2ProPlus export contract"
+      ],
+      "filename": "kurisu_crs_gpt-e100.ckpt",
+      "kind": "gpt",
+      "model_version": "gsv-v2proplus",
+      "sha256": "c0888c026c6d0dde3e57d2541c5361701d99079d692fb88f413b7628156418fa",
+      "state_key_count": 295
+    },
+    "model_version": "gsv-v2proplus",
+    "sovits": {
+      "evidence": [
+        "config.version=v2ProPlus",
+        "SoVITS training config declares the V2ProPlus generator family",
+        "SoVITS tensor shapes match the V2ProPlus export contract"
+      ],
+      "filename": "kurisu_crs_s2-e12_v2ProPlus.pth",
+      "kind": "sovits",
+      "model_version": "gsv-v2proplus",
+      "sha256": "035a0e9bba90559839c6a99a2ae1b5fa7e599a1e9b048964fc920a3de3f257a5",
+      "state_key_count": 781
+    }
+  },
+  "reference_audio": {
+    "filename": "crs_1393.wav",
+    "sha256": "24be2f3d150a03289e2e74f9527141fc1ea039e4712a1f51ef8049f9d8cd6d9a"
+  },
+  "sovits": {
+    "filename": "kurisu_crs_s2-e12_v2ProPlus.pth",
+    "sha256": "035a0e9bba90559839c6a99a2ae1b5fa7e599a1e9b048964fc920a3de3f257a5"
+  },
+  "unsafe_pickle_allowed": false
+}

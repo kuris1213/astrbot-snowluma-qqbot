@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "default",
+      "scope": "default",
+      "pack_id": "local-9552ab28ba5fe56b",
+      "pack_ids": [
+        "local-9552ab28ba5fe56b"
+      ]
+    }
+  ]
+}

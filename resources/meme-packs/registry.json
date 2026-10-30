@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "installed_packs": [
+    {
+      "id": "deepseek-girl-pack",
+      "name": "大肥鱼表情包",
+      "version": "1.0.0",
+      "enabled": true,
+      "installed_at": "2026-10-24T18:12:46.430259+00:00"
+    },
+    {
+      "id": "local-9552ab28ba5fe56b",
+      "name": "牧濑红莉牺",
+      "version": "1.0.0",
+      "enabled": true,
+      "installed_at": "2026-10-25T13:35:31.490146+00:00"
+    }
+  ]
+}

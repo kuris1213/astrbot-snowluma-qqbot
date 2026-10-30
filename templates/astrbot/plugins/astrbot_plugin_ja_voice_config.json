@@ -1,0 +1,13 @@
+{
+  "enable": true,
+  "tts_base": "http://127.0.0.1:9882/v1",
+  "model": "kurisu-v2proplus",
+  "voice_profile": "default",
+  "language": "ja",
+  "probability": 1.0,
+  "keep_text": true,
+  "timeout": 120,
+  "inject_voice_rule": true,
+  "block_self_tts_commands": true,
+  "block_shell_tools": false
+}

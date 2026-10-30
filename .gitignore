@@ -1,0 +1,44 @@
+# ── 运行时生成的配置（含 API Key / 令牌，绝不提交）────────────
+/deploy/config.psd1
+/astrbot/data/cmd_config.json
+/astrbot/data/cmd_config.json.*
+/astrbot/data/config/
+/astrbot/data/plugins/
+/astrbot/data/data_v4.db
+/astrbot/data/data_v4.db-*
+/astrbot/data/plugin_data/
+/astrbot/data/attachments/
+/astrbot/data/temp/
+/astrbot/data/logs/
+/astrbot/data/workspaces/
+/astrbot/data/webchat/
+/astrbot/data/t2i_templates/
+/astrbot/data/knowledge_base/
+/astrbot/.astrbot
+/astrbot/astrbot.lock
+
+# ── 日志 / 虚拟环境 / 缓存 ──────────────────────────────────
+/logs/
+/.venv-embedding/
+**/__pycache__/
+*.py[cod]
+*.log
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ── 大模型（7 GB，单独分发，见 docs/05）────────────────────
+/models/tts/*
+!/models/tts/.gitkeep
+!/models/tts/README.md
+!/models/tts/kurisu-v2proplus.metadata/
+!/models/tts/kurisu-v2proplus.metadata/**
+
+# ── 安装后被改写的入口（含本机绝对路径）────────────────────
+/startup-hidden.vbs
+/打开管理页.bat
+
+# ── 系统垃圾 ───────────────────────────────────────────────
+Thumbs.db
+Desktop.ini
+.DS_Store

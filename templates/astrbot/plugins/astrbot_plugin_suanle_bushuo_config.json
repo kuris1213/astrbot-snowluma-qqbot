@@ -1,0 +1,19 @@
+{
+  "enable": true,
+  "silence_tool_enable": true,
+  "must_reply_umo": [
+    "YOUR_QQ_NUMBER"
+  ],
+  "must_reply_uid": [],
+  "must_reply_gid": [],
+  "blacklist_qq": [],
+  "blacklist_uid": [],
+  "blacklist_umo": [],
+  "blacklist_group_uid": [],
+  "protected_admins": true,
+  "blocked_context_window": 20,
+  "blocked_context_ttl_seconds": 86400,
+  "respect_recall_notice": true,
+  "strict_non_streaming_warning": true,
+  "debug_log": false
+}

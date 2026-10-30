@@ -1,0 +1,5 @@
+name: astrbot_plugin_ja_voice
+display_name: 中文文本 + 日语语音
+desc: 把机器人的中文回复翻译成日语，再交给本地 AnifLive-TTS 合成语音；文字仍然是中文。
+version: 1.0.0
+author: local

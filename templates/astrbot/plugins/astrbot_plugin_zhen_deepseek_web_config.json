@@ -1,0 +1,19 @@
+{
+  "api_key": "",
+  "base_url": "https://api.deepseek.com",
+  "timeout": 30,
+  "search_count": 8,
+  "need_content": false,
+  "auto_fetch_top": 0,
+  "auto_fetch_chars": 4000,
+  "max_summary_chars": 800,
+  "max_content_chars": 8000,
+  "max_tool_output_chars": 12000,
+  "fetch_output_mode": "image",
+  "image_width": 1080,
+  "image_max_chars": 6000,
+  "image_font": "",
+  "chat_preview_chars": 1200,
+  "enable_commands": true,
+  "proxy": ""
+}
