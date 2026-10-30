@@ -4,7 +4,7 @@
 # 真正的业务配置在 templates\ 目录里，安装时渲染成 astrbot\data\cmd_config.json
 # 与 snowluma 的 config\*.json。
 #
-# 本文件含你的 API Key / 令牌，只留在本机，不要发给别人或打包分发。
+# 本文件是空模板，可安全分发；install.ps1 生成的 deploy\config.psd1 才含你的 Key / 令牌，只留在本机。
 
 @{
     # ── 账号 ────────────────────────────────────────────────
