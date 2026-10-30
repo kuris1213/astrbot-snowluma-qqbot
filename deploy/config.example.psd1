@@ -4,7 +4,7 @@
 # 真正的业务配置在 templates\ 目录里，安装时渲染成 astrbot\data\cmd_config.json
 # 与 snowluma 的 config\*.json。
 #
-# 本文件已被 .gitignore 忽略：它可能包含你的 API Key / 令牌，不要提交到 GitHub。
+# 本文件含你的 API Key / 令牌，只留在本机，不要发给别人或打包分发。
 
 @{
     # ── 账号 ────────────────────────────────────────────────

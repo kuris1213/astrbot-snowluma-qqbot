@@ -33,7 +33,7 @@
   同时生成 kurisu-v2proplus-portable.7z（自动下载 7zr.exe）。
 
 .PARAMETER NoShared
-  不复制 shared（只做模型本体，约 2.0 GiB）。发布到 Hugging Face 时推荐，
+  不复制 shared（只做模型本体，约 2.0 GiB）。只分发模型本体时推荐，
   对方用 AnifLive 的 setup_shared_assets.py 自行下载。
 
 .PARAMETER SplitSize
@@ -158,7 +158,7 @@ if ($Compress) {
 
 Write-Host ''
 Write-Host '下一步：'
-Write-Host '  · 上传到 Hugging Face / 网盘（不要放进 Git 仓库，见 docs\05-模型与语音.md 第 3 节）'
+Write-Host '  · 分发到网盘或移动硬盘（不要放进 Git 仓库，见 docs\05-模型与语音.md 第 3 节）'
 Write-Host '  · 对方下载后：.\scripts\install-tts-model.ps1 -Source <压缩包或目录>'
 Write-Host '  · 然后在本机重建引擎：aniflive-tts model rebuild-engines --model-package <模型目录>'
 Write-Host ''

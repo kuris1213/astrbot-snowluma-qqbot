@@ -73,8 +73,8 @@ flowchart LR
 ├─ assets\                      # 人格素材 / 知识库素材
 ├─ scripts\
 │  ├─ install-tts-model.ps1     # 接入 / 校验 7 GB 语音模型
-│  └─ build_templates.py        # 维护者工具：从现网配置重新生成脱敏模板
-├─ docs\                        # 六篇文档
+│  └─ build-tts-portable.ps1    # 把完整语音模型精简成可分发的小包
+├─ docs\                        # 七篇文档
 ├─ NOTICE.md / THIRD_PARTY.md   # 授权与第三方清单
 └─ LICENSE                      # MIT（仅原创部分）
 ```
@@ -130,8 +130,8 @@ aniflive-tts model rebuild-engines --model-package models\tts\kurisu-v2proplus
 ### 2. 获取仓库
 
 ```powershell
-git clone https://github.com/<你的账号>/<仓库名>.git
-cd <仓库名>
+git clone https://github.com/kuris1213/astrbot-snowluma-qqbot.git
+cd astrbot-snowluma-qqbot
 ```
 
 没有 Git 就下载 ZIP 解压。**路径尽量不要带中文和空格**（`startup-hidden.vbs` 对此敏感）。
@@ -197,7 +197,7 @@ Select-String -Path .\logs\astrbot.out.log -Pattern 'Initial password'
 - Key 只写在你本机的两个文件里：`deploy\config.psd1`、`astrbot\data\cmd_config.json`。两者都在 `.gitignore` 中，不会进入 Git。
 - 装完后 `install.ps1` 会把同样的提醒写到 `logs\API-KEY-README.txt`；`start-astrbot.ps1` 发现没配 Key 时也会在控制台告警。
 - 没有 Key 时：机器人能启动、能收到 QQ 消息，但**不会回复对话**；热搜、梗百科等命令类插件仍可用。
-- 不要把 Key 发给别人、贴到 Issue/截图里，或用 `git add -f` 提交。
+- 不要把 Key 发给别人、贴到 Issue/截图里。
 - 获取：<https://platform.deepseek.com/api_keys>。换用其他云模型或本地 Ollama，见 [docs/02-配置说明.md](docs/02-配置说明.md#32-必须关注的字段)。
 
 > 一句话：**Key 是部署者自己的账号凭据，费用也记在部署者自己的账户；别人 clone 你的仓库后，要填他自己的 Key。**
@@ -225,16 +225,17 @@ Select-String -Path .\logs\astrbot.out.log -Pattern 'Initial password'
 ## 隐私与安全
 
 - 仓库里**没有任何**真实 QQ 号、API Key、Cookie、面板密码、聊天记录；配置全是占位符。
-- `deploy\config.psd1`、`astrbot\data\`、`logs\`、`models\tts\` 都在 `.gitignore` 里。**不要**用 `git add -f` 把它们加进去。
-- 提交前自检：
+- `deploy\config.psd1`、`astrbot\data\`、`logs\`、`models\tts\` 里是**你本机的运行数据**（含 Key、Cookie、聊天记录），
+  只留在自己机器上，不要打包、压缩或发送给别人。
+- 部署后自检（确认这些文件只在本机）：
 
   ```powershell
-  git status --short
-  git grep -nE "sk-[A-Za-z0-9]{20,}|SESSDATA|BILI_JCT|REFRESH_TOKEN|pbkdf2_sha256"
+  Test-Path deploy\config.psd1, astrbot\data\cmd_config.json
+  Select-String deploy\config.psd1 -Pattern 'sk-|Token'
   ```
 
 - 面板、OneBot、SnowLuma 全部只绑回环；不要把 6185 / 5099 暴露到公网。
-- `.env` 式的密钥管理：本仓库用 `deploy\config.psd1`（本机文件），它只存在于你的机器上。
+- 密钥管理：本仓库用 `deploy\config.psd1`（本机文件），它只存在于你的机器上。
 
 更多见 [docs/07-安全与脱敏.md](docs/07-安全与脱敏.md)。
 
@@ -250,39 +251,6 @@ Select-String -Path .\logs\astrbot.out.log -Pattern 'Initial password'
 | 知识库检索报错 | `:8010` 没起，或 `.venv-embedding` 缺 torch/transformers |
 | 主动消息不发 | 电脑睡眠导致定时任务错过；见 docs/06 第 2 节 |
 | 脚本报「字符串缺少终止符」 | `.ps1` 丢了 UTF-8 BOM（PowerShell 5.1 会按 GBK 解析中文） |
-
----
-
-## 发布到 GitHub
-
-仓库已经 `git init` 并做好首个提交（作者是占位身份）。发布前先把作者改成你自己：
-
-```powershell
-git config user.name  "你的名字"
-git config user.email "you@example.com"
-git commit --amend --reset-author --no-edit
-```
-
-然后在 GitHub 新建一个**空仓库**（不要勾选 README / .gitignore），再：
-
-```powershell
-git remote add origin https://github.com/<你的账号>/<仓库名>.git
-git branch -M main
-git push -u origin main
-```
-
-注意事项：
-
-- `model.safetensors` 是 91.4 MB，GitHub 单文件上限 100 MB，能推但会提示「文件较大」。想更轻就把 `models/` 从历史里拿掉，让使用者自己下（见 docs/05）。
-- 不要用 `git add -f` 强推 `deploy/config.psd1`、`astrbot/data/`、`logs/`。
-- 推之前再跑一遍：
-
-  ```powershell
-  git status --short
-  git grep -nE "sk-[A-Za-z0-9]{20,}|SESSDATA|BILI_JCT|pbkdf2_sha256"
-  ```
-
-- 建议在仓库 Settings → Code security 里打开 **Secret scanning** 和 **Push protection**。
 
 ---
 

@@ -323,7 +323,7 @@ $keyNotice = @"
    这两个文件都被 .gitignore 排除，不会进入 Git。
 4. 没有 Key 时：机器人能启动、能收 QQ 消息，但不会回复对话；
    热搜、梗百科等命令类插件仍可正常使用。
-5. 不要把 Key 发给别人、贴在 Issue/截图里，或用 git add -f 提交。
+5. 不要把 Key 发给别人、贴在 Issue/截图里，也不要打包进任何分享文件。
 6. 获取 Key：https://platform.deepseek.com/api_keys
 7. 改用其它模型：AstrBot 面板 → 服务商；或本地 Ollama 等 OpenAI 兼容端点。
 
